@@ -1,0 +1,25 @@
+version: '3.6'
+services:
+  backend:
+    image: registry.gitlab.com/codecapi/codecapi-portale/portal-backend:latest
+    container_name: codecapi-portal-backend
+    restart: always
+    environment:
+      - PORT=8080
+      - API_PATH=http://192.168.0.200:2002
+    ports:
+      - 2020:5001
+    volumes:
+      - /mnt/user/media/tafeltennis:/usr/share/
+
+  db:
+    image: postgres
+    container_name: codecapi-postgress
+    environment:
+      POSTGRES_PASSWORD: portal
+    restart: always
+
+networks:
+  default:
+    name: capi-portal
+

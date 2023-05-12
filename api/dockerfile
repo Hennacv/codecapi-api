@@ -1,0 +1,37 @@
+ARG CONTAINER_ROOT=/opt/api
+
+FROM node:18-alpine As development
+RUN apk add  --no-cache ffmpeg
+ARG CONTAINER_ROOT
+ENV CONTAINER_ROOT $CONTAINER_ROOT
+
+# Start client build
+WORKDIR $CONTAINER_ROOT
+
+COPY --chown=node:node package.json yarn.lock ./
+
+RUN yarn
+
+COPY --chown=node:node tsconfig.json tsconfig.build.json ./
+COPY --chown=node:node src src
+
+RUN yarn build
+
+FROM node:18-alpine As production
+RUN apk add  --no-cache ffmpeg
+ARG CONTAINER_ROOT
+ENV CONTAINER_ROOT $CONTAINER_ROOT
+
+ENV NODE_ENV="production"
+
+# Start client build
+WORKDIR $CONTAINER_ROOT
+
+COPY --chown=node:node package.json yarn.lock ./
+
+RUN yarn install --production
+
+COPY --from=build --chown=node:node $CONTAINER_ROOT/dist dist
+COPY --from=build --chown=node:node $CONTAINER_ROOT/src src
+
+CMD yarn start:prod
