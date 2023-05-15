@@ -9,9 +9,10 @@ import { UsersModule } from './users/users.module';
 import { AnswerModule } from './answer/answer.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { NotificationsModule } from './notifications/notifications.module';
+import { VotesModule } from './votes/votes.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dbConfig), QuestionsModule, TagsModule, UsersModule, AuthModule, AnswerModule, EventEmitterModule.forRoot(), NotificationsModule],
+  imports: [TypeOrmModule.forRoot(dbConfig), QuestionsModule, TagsModule, UsersModule, AuthModule, AnswerModule, EventEmitterModule.forRoot(), NotificationsModule, VotesModule],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

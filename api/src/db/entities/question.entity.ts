@@ -3,6 +3,7 @@ import { Answer } from './answer.entity';
 import { CustomBaseEntity } from './custom-base-entity';
 import { Tag } from './tag.entity';
 import { User } from './user.entity';
+import { Vote } from './vote.entity';
 
 @Entity()
 export class Question extends CustomBaseEntity {
@@ -26,4 +27,7 @@ export class Question extends CustomBaseEntity {
 
   @OneToMany(() => Answer, (answer) => answer.question)
   answer: Answer[];
+
+  @OneToMany(() => Vote, (vote) => vote.question)
+  votes: Vote[];
 }
