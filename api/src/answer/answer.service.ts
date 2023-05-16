@@ -6,6 +6,7 @@ import { User } from '../db/entities/user.entity';
 import { CreateAnswerDto } from './dto/create-answer.dto';
 import { UpdateAnswerDto } from './dto/update-answer.dto';
 import { NotificationsService } from '../notifications/notifications.service';
+import { VotesService } from '../votes/votes.service';
 
 @Injectable()
 export class AnswerService {
@@ -13,11 +14,17 @@ export class AnswerService {
     @InjectRepository(Answer)
     private repo: Repository<Answer>,
     private notificationService: NotificationsService,
+    private voteService: VotesService,
   ) {}
 
   async create(createAnswerDto: CreateAnswerDto, user: User) {
     let answer = this.repo.create({ ...createAnswerDto, userId: user.id });
     await answer.save().then(() => {
+      this.voteService.create({
+        type: 'upvote',
+        users: [],
+        answerId: answer.id,
+      });
       this.notificationService.sentNotification({
         type: 'new-answer',
         user: {

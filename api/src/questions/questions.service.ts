@@ -8,6 +8,7 @@ import { AddTagDto } from './dto/add-tag.dto';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { NotificationsService } from '../notifications/notifications.service';
+import { VotesService } from '../votes/votes.service';
 
 @Injectable()
 export class QuestionsService {
@@ -15,11 +16,17 @@ export class QuestionsService {
     @InjectRepository(Question)
     private repo: Repository<Question>,
     private notificationService: NotificationsService,
+    private voteService: VotesService,
   ) {}
 
   async create(createQuestionDto: CreateQuestionDto, user: User) {
     let question = this.repo.create({ ...createQuestionDto, userId: user.id });
     await question.save().then(() => {
+      this.voteService.create({
+        type: 'upvote',
+        users: [],
+        questionId: question.id,
+      });
       this.notificationService.sentNotification({
         type: 'new-question',
         user: {

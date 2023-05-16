@@ -19,9 +19,9 @@ export class CreateVoteDto {
 
   @IsOptional()
   @IsNumber()
-  questionId: number;
+  questionId?: number;
 
   @IsOptional()
   @IsNumber()
-  answerId: number;
+  answerId?: number;
 }
