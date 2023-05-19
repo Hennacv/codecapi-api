@@ -37,7 +37,7 @@ export class VotesService {
   async fetchVote(id: number) {
     return await Vote.findOneOrFail({
       where: { id },
-      relations: ['users'],
+      relations: ['user', 'question'],
     });
   }
 }

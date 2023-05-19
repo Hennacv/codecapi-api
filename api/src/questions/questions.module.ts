@@ -7,7 +7,7 @@ import { NotificationsModule } from '../notifications/notifications.module';
 import { VotesModule } from '../votes/votes.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Question]), NotificationsModule, VotesModule],
+  imports: [TypeOrmModule.forFeature([Question]), NotificationsModule],
   controllers: [QuestionsController],
   providers: [QuestionsService],
 })

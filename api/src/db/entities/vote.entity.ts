@@ -9,11 +9,7 @@ import { Answer } from './answer.entity';
 export class Vote extends CustomBaseEntity {
   @Column()
   type: string;
-
-  @ManyToMany(() => User, { cascade: true, onDelete: 'CASCADE' })
-  @JoinTable()
-  users: User[];
-
+  
   @ManyToOne(() => Question, (question) => question.votes, { onDelete: 'SET NULL', nullable: true })
   @JoinColumn()
   question: Question;
@@ -27,4 +23,11 @@ export class Vote extends CustomBaseEntity {
 
   @Column({ nullable: true })
   answerId: number;
+
+  @ManyToOne(() => User, (user) => user.votes, { onDelete: 'SET NULL', nullable: true })
+  @JoinColumn()
+  user: User;
+
+  @Column({ nullable: true })
+  userId: number;
 }

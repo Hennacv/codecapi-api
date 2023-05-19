@@ -16,17 +16,11 @@ export class QuestionsService {
     @InjectRepository(Question)
     private repo: Repository<Question>,
     private notificationService: NotificationsService,
-    private voteService: VotesService,
   ) {}
 
   async create(createQuestionDto: CreateQuestionDto, user: User) {
     let question = this.repo.create({ ...createQuestionDto, userId: user.id });
     await question.save().then(() => {
-      this.voteService.create({
-        type: 'upvote',
-        users: [],
-        questionId: question.id,
-      });
       this.notificationService.sentNotification({
         type: 'new-question',
         user: {
@@ -41,7 +35,7 @@ export class QuestionsService {
 
   async findAll() {
     const questions = await Question.find({
-      relations: ['answer', 'tags', 'user', 'votes.users'],
+      relations: ['answer', 'tags', 'user', 'votes.user'],
       order: {
         createdAt: 'desc',
         tags: {
@@ -85,7 +79,7 @@ export class QuestionsService {
   async fetchQuestion(id: number) {
     return await Question.findOneOrFail({
       where: { id },
-      relations: ['answer.user', 'answer.votes.users', 'tags', 'user', 'votes.users'],
+      relations: ['answer.user', 'answer.votes.user', 'tags', 'user', 'votes.user'],
       order: {
         tags: {
           title: 'asc',
