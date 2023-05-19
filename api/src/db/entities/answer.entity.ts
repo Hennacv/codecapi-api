@@ -3,10 +3,10 @@ import { CustomBaseEntity } from "./custom-base-entity";
 import { User } from './user.entity';
 import { Question } from './question.entity';
 import { Vote } from "./vote.entity";
+import { Comment } from './comment.entity';
 
 @Entity()
-export class Answer extends CustomBaseEntity{
-
+export class Answer extends CustomBaseEntity {
   @Column({ name: 'user_id', nullable: true })
   userId: number;
 
@@ -19,9 +19,12 @@ export class Answer extends CustomBaseEntity{
   @ManyToOne(() => Question, (question) => question.answer, { onDelete: 'CASCADE' })
   question: Question;
 
-  @Column({type: 'json', default: []})
+  @Column({ type: 'json', default: [] })
   blocks: Block[];
 
   @OneToMany(() => Vote, (vote) => vote.answer)
   votes: Vote[];
+
+  @OneToMany(() => Comment, (comment) => comment.answer)
+  comments: Comment[];
 }

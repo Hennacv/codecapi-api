@@ -8,7 +8,6 @@ import { AddTagDto } from './dto/add-tag.dto';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { NotificationsService } from '../notifications/notifications.service';
-import { VotesService } from '../votes/votes.service';
 
 @Injectable()
 export class QuestionsService {
@@ -79,7 +78,7 @@ export class QuestionsService {
   async fetchQuestion(id: number) {
     return await Question.findOneOrFail({
       where: { id },
-      relations: ['answer.user', 'answer.votes.user', 'tags', 'user', 'votes.user'],
+      relations: ['answer.user', 'answer.votes.user', 'answer.comments', 'tags', 'user', 'votes.user'],
       order: {
         tags: {
           title: 'asc',
