@@ -34,7 +34,7 @@ export class QuestionsService {
 
   async findAll() {
     const questions = await Question.find({
-      relations: ['answer', 'tags', 'user'],
+      relations: ['answer.user', 'tags', 'user'],
       order: {
         createdAt: 'desc',
         tags: {
