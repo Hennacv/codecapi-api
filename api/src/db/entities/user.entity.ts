@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 import { Answer } from './answer.entity';
 import { CustomBaseEntity } from './custom-base-entity';
 import { Question } from './question.entity';
+import { Vote } from './vote.entity';
 
 @Entity()
 export class User extends CustomBaseEntity {
@@ -19,4 +20,7 @@ export class User extends CustomBaseEntity {
 
   @OneToMany(() => Answer, (answer) => answer.user)
   answer: Answer[];
+
+  @OneToMany(() => Vote, (vote) => vote.user)
+  votes: Vote[];
 }

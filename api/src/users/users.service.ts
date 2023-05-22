@@ -11,8 +11,8 @@ export class UsersService {
     return users;
   }
 
-  async findOne(id: number) {
-    const user = await this.em.findOneByOrFail(User, { id });
+  async findOne(uid: string) {
+    const user = await this.em.findOneByOrFail(User, { uid });
     return user;
   }
 }
