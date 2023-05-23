@@ -59,4 +59,10 @@ export class AnswerService {
       },
     });
   }
+
+  async fetchAnswerCount(userId: number) {
+    return await Answer.count({
+    where: { userId },
+    })
+  }
 }

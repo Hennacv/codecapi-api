@@ -87,4 +87,10 @@ export class QuestionsService {
       },
     });
   }
+
+  async fetchQuestionCount(userId: number) {
+    return await Question.count({
+    where: { userId },
+    })
+  }
 }

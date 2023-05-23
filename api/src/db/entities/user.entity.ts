@@ -1,8 +1,9 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, JoinTable } from 'typeorm';
 import { Answer } from './answer.entity';
 import { CustomBaseEntity } from './custom-base-entity';
 import { Question } from './question.entity';
 import { Vote } from './vote.entity';
+import { Tag } from './tag.entity';
 
 @Entity()
 export class User extends CustomBaseEntity {
@@ -23,4 +24,8 @@ export class User extends CustomBaseEntity {
 
   @OneToMany(() => Vote, (vote) => vote.user)
   votes: Vote[];
+
+  @ManyToMany(() => Tag, { cascade: true, onDelete: 'CASCADE' })
+  @JoinTable()
+  tags: Tag[];
 }

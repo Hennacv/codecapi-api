@@ -9,6 +9,7 @@ import { VotesModule } from '../votes/votes.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Answer]), NotificationsModule],
   controllers: [AnswerController],
-  providers: [AnswerService]
+  providers: [AnswerService],
+  exports: [AnswerService],
 })
 export class AnswerModule {}
