@@ -10,5 +10,6 @@ import { VotesModule } from '../votes/votes.module';
   imports: [TypeOrmModule.forFeature([Question]), NotificationsModule],
   controllers: [QuestionsController],
   providers: [QuestionsService],
+  exports: [QuestionsService],
 })
 export class QuestionsModule {}
