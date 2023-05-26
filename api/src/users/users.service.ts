@@ -3,6 +3,7 @@ import { EntityManager } from 'typeorm';
 import { User } from '../db/entities/user.entity';
 import { AddTagDto } from '../questions/dto/add-tag.dto';
 import { Tag } from '../db/entities/tag.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -20,6 +21,13 @@ export class UsersService {
 
   async findUserById(id: number) {
     const user = await User.findOneOrFail({where: { id }, relations: ['tags'],});
+    return user;
+  }
+
+  async update(id: number, updateUserDto:  UpdateUserDto ) {
+    const user = await this.findUserById(id);
+    Object.assign(user, updateUserDto);
+    user.save();
     return user;
   }
 

@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { AddTagDto } from '../questions/dto/add-tag.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -16,6 +17,15 @@ export class UsersController {
   @Get(':uid')
   findOne(@Param('uid') uid: string) {
     return this.usersService.findOne(uid);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: number,
+    @Body()
+    updateUserDto:  UpdateUserDto ,
+  ) {
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Post(':uid/tags')
