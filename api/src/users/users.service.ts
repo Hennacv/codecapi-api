@@ -10,7 +10,7 @@ export class UsersService {
   constructor(private em: EntityManager) {}
 
   async findAll() {
-    const users = await this.em.find(User);
+    const users = await User.find({ relations: ['tags'] });
     return users;
   }
 
