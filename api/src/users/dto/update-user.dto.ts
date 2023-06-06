@@ -13,6 +13,9 @@ export class UpdateUserDto {
   @IsOptional()
   email: string;
 
+  @IsOptional()
+  description: string;
+
   @IsArray()
   @ValidateNested()
   @Type(() => TagIdDto)
