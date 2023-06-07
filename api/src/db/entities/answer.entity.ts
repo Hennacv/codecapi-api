@@ -27,4 +27,7 @@ export class Answer extends CustomBaseEntity {
 
   @OneToMany(() => Comment, (comment) => comment.answer)
   comments: Comment[];
+
+  @Column({default: false})
+  accepted: boolean;
 }

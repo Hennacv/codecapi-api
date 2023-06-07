@@ -6,4 +6,7 @@ export class CreateAnswerDto {
 
     @IsNotEmpty()
     questionId: number;
+
+    @IsNotEmpty()
+    accepted: boolean;
 }
