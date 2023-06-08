@@ -65,4 +65,13 @@ export class AnswerService {
     where: { userId },
     })
   }
+
+  async fetchAcceptedAnswerCount(userId: number) {
+    return await Answer.count({
+    where: {
+      userId: userId,
+      accepted: true
+    },
+    })
+  }
 }
