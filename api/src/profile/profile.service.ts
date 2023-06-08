@@ -16,6 +16,7 @@ export class ProfileService {
     const user = await this.usersService.findUserById(id)
     const questionCount = await this.questionService.fetchQuestionCount(id)
     const answerCount = await this.answerService.fetchAnswerCount(id)
-      return {"user": user, "questionCount": questionCount, "answerCount" : answerCount }
+    const acceptedAnswerCount = await this.answerService.fetchAcceptedAnswerCount(id)
+      return {"user": user, "questionCount": questionCount, "answerCount" : answerCount, "acceptedAnswerCount": acceptedAnswerCount }
     }
 }
