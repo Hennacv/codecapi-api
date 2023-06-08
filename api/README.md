@@ -13,6 +13,12 @@ GOOGLE_CLIENT_SECRET=client_secret
 DOMAIN=http://localhost:3000
 ```
 
+In my case you have a user and password for your database the URL would need to be this instead
+
+```
+DATABASE_URL=postgres://user:password@localhostcodecapi_portal_development
+```
+
 ## Service account
 
 A file called `service-account.json` should be placed in the root folder. This file contains the credentials necessary for Google OAuth. Below you will find an example of how the file should look, the exact details can be retrieved from the resident supervisor.
