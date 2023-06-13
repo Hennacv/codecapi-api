@@ -1,4 +1,5 @@
-Welcome to the capi-portal, this project is a monorepo consisting of a desktop folder and an api folder.
+Welcome to the capi-portal, this is the back-end of the project.
+The front-end can be found here: https://gitlab.com/codecapi/codecapi-portale
 There are a few things you need to do before you can start working on this project.
 ## .env
 
