@@ -32,7 +32,8 @@ export class Vote extends CustomBaseEntity {
   @Column({ nullable: true })
   userId: number;
 
-  @OneToMany(() => Tricks, (trick) => trick.votes)
-  tricks: Tricks[];
+  @ManyToOne(() => Tricks, (trick) => trick.votes, { onDelete: 'SET NULL', nullable: true })
+  @JoinColumn()
+  tricks: Tricks;
 }
 
