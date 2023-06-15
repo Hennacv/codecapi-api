@@ -1,8 +1,9 @@
-import { Column, Entity, Index, JoinColumn, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { CustomBaseEntity } from './custom-base-entity';
 import { User } from './user.entity';
 import { Question } from './question.entity';
 import { Answer } from './answer.entity';
+import { Tricks } from './tricks.entity';
 
 @Entity()
 @Index(['type', 'questionId', 'answerId'], { unique: true })
@@ -30,4 +31,8 @@ export class Vote extends CustomBaseEntity {
 
   @Column({ nullable: true })
   userId: number;
+
+  @OneToMany(() => Tricks, (trick) => trick.votes)
+  tricks: Tricks[];
 }
+
