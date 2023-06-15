@@ -14,4 +14,7 @@ export class CreateVoteDto {
 
   @IsOptional()
   answerId?: number;
+
+  @IsOptional()
+  trickId?: number;
 }
