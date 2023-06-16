@@ -19,6 +19,9 @@ export class UpdateUserDto {
   @IsOptional()
   jobtitle: string;
 
+  @IsOptional()
+  team: string;
+
   @IsArray()
   @ValidateNested()
   @Type(() => TagIdDto)

@@ -23,6 +23,9 @@ export class User extends CustomBaseEntity {
   @Column({ nullable: true })
   jobtitle: string;
 
+  @Column({ nullable: true })
+  team: string;
+
   @OneToMany(() => Question, (question) => question.user)
   questions: Question[];
 
