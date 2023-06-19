@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../db/entities/user.entity';
 import { CreateTrickDto } from './dto/create-trick.dto';
 import { Tricks } from '../db/entities/tricks.entity';
+import { UpdateTrickDto } from './dto/update-trick.dto';
 
 @Injectable()
 export class TrickService {
@@ -16,6 +17,18 @@ export class TrickService {
     let trick = this.repo.create({ ...createTrickDto, userId: user.id });
     await trick.save();
     return this.fetchTrick(trick.id);
+  }
+
+  async update(id: number, updateTrickDto: UpdateTrickDto) {
+    const question = await this.fetchTrick(id);
+    Object.assign(question, updateTrickDto);
+    question.save();
+    return question;
+  }
+
+  async remove(id: number) {
+    const trick = await Tricks.findOneByOrFail({ id });
+    await this.repo.remove(trick);
   }
 
   async findAll() {
