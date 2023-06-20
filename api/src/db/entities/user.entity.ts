@@ -23,7 +23,7 @@ export class User extends CustomBaseEntity {
   @Column({ nullable: true })
   jobtitle: string;
 
-  @Column({ nullable: true })
+  @Column({ default: 'none' })
   team: string;
 
   @OneToMany(() => Question, (question) => question.user)
