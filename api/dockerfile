@@ -31,7 +31,7 @@ COPY --chown=node:node package.json yarn.lock ./
 
 RUN yarn install --production
 
-COPY --from=build --chown=node:node $CONTAINER_ROOT/dist dist
+COPY --from=build --chown=node:node $CONTAINER_ROOT/build build
 COPY --from=build --chown=node:node $CONTAINER_ROOT/src src
 
 CMD yarn start:prod
