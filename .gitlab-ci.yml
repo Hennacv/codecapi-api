@@ -7,14 +7,16 @@ stages:
 release:
   stage: Release
   image: node:18
-
+  only:
+    - main
   before_script:
     - npm install -g semantic-release @semantic-release/gitlab @semantic-release/commit-analyzer @semantic-release/release-notes-generator
   script:
     - semantic-release
 build-tags:
   stage: Build
-
+  only:
+    - tags
   image: docker:stable
   services:
     - docker:dind
