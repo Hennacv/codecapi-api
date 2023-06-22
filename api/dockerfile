@@ -1,7 +1,7 @@
 ARG CONTAINER_ROOT=/opt/api
 
-FROM node:18-alpine As development
-RUN apk add  --no-cache ffmpeg
+FROM node:18-alpine AS build
+
 ARG CONTAINER_ROOT
 ENV CONTAINER_ROOT $CONTAINER_ROOT
 
@@ -17,8 +17,8 @@ COPY --chown=node:node src src
 
 RUN yarn build
 
-FROM node:18-alpine As production
-RUN apk add  --no-cache ffmpeg
+FROM node:18-alpine as production
+
 ARG CONTAINER_ROOT
 ENV CONTAINER_ROOT $CONTAINER_ROOT
 
