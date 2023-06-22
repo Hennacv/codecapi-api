@@ -1,5 +1,5 @@
 variables:
-  CONTAINER_IMAGE: registry.gitlab.com/codecapi/codecapi/codecapi-portale-api
+  CONTAINER_IMAGE: registry.gitlab.com/codecapi/codecapi-portale-api
 stages:
   - Release
   - Build
