@@ -24,9 +24,9 @@ build-tags:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_IMAGE:latest-build || true
-    - docker build --cache-from $CONTAINER_IMAGE:latest-build --tag $CONTAINER_IMAGE:latest-build --target build ./api/Dockerfile
+    - docker build --cache-from $CONTAINER_IMAGE:latest-build --tag $CONTAINER_IMAGE:latest-build --target build ./api/dockerfile
     - docker push $CONTAINER_IMAGE:latest-build
-    - docker build --cache-from $CONTAINER_IMAGE:latest-build --tag $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_TAG ./api/Dockerfile
+    - docker build --cache-from $CONTAINER_IMAGE:latest-build --tag $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_TAG ./api/dockerfile
     - docker push $CONTAINER_IMAGE:latest
     - docker push $CONTAINER_IMAGE:$CI_COMMIT_TAG
 build-mr:
@@ -38,4 +38,4 @@ build-mr:
     - docker:dind
   script:
     - docker pull $CONTAINER_IMAGE:latest || true
-    - docker build --cache-from $CONTAINER_IMAGE:latest ./api/Dockerfile
+    - docker build --cache-from $CONTAINER_IMAGE:latest ./api/dockerfile
