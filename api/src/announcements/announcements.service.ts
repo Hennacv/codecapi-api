@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../db/entities/user.entity';
 import { Announcements } from '../db/entities/announcement.entity';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
+import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 
 @Injectable()
 export class AnnouncementService {
@@ -16,6 +17,18 @@ export class AnnouncementService {
     let announcement = this.repo.create({ ...createAnnouncementDto, userId: user.id });
     await announcement.save();
     return this.fetchAnnouncement(announcement.id);
+  }
+
+  async update(id: number, updateAnnouncementDto: UpdateAnnouncementDto) {
+    const announcement= await this.fetchAnnouncement(id);
+    Object.assign(announcement, updateAnnouncementDto);
+    announcement.save();
+    return announcement;
+  }
+
+  async remove(id: number) {
+    const announcement = await Announcements.findOneByOrFail({ id });
+    await this.repo.remove(announcement);
   }
 
   async findAll() {
