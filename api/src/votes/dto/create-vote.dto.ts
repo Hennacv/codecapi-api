@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, Validate } from 'class-validator';
+import { IsNotEmpty, IsOptional, Validate } from 'class-validator';
 import { OneOfValidator } from '../../validators/one-of-validator';
 
 export class CreateVoteDto {
@@ -16,5 +16,5 @@ export class CreateVoteDto {
   answerId?: number;
 
   @IsOptional()
-  trickId?: number;
+  tricksId?: number;
 }

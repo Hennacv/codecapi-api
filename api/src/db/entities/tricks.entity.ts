@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { CustomBaseEntity } from './custom-base-entity';
 import { User } from './user.entity';
 import { Vote } from './vote.entity';
+import { Comment } from './comment.entity';
 
 @Entity()
 export class Tricks extends CustomBaseEntity {
@@ -19,4 +20,7 @@ export class Tricks extends CustomBaseEntity {
 
   @OneToMany(() => Vote, (vote) => vote.tricks)
   votes: Vote[];
+
+  @OneToMany(() => Comment, (comment) => comment.tricks)
+  comments: Comment[];
 }

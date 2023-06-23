@@ -33,7 +33,7 @@ export class TrickService {
 
   async findAll() {
     const tricks = await Tricks.find({
-      relations: ['user', 'votes.user'],
+      relations: ['user', 'votes.user', 'comments.user'],
       order: {
         createdAt: 'desc',
       },
@@ -48,7 +48,7 @@ export class TrickService {
   async fetchTrick(id: number) {
     return await Tricks.findOneOrFail({
       where: { id },
-      relations: ['user'],
+      relations: ['user', 'comments'],
     });
   }
 }
