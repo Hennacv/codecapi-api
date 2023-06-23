@@ -5,6 +5,7 @@ import { Question } from './question.entity';
 import { Vote } from './vote.entity';
 import { Tag } from './tag.entity';
 import { Comment } from './comment.entity';
+import { Announcements } from './announcement.entity';
 import { Tricks } from './tricks.entity';
 
 @Entity()
@@ -45,4 +46,8 @@ export class User extends CustomBaseEntity {
   @ManyToMany(() => Tag, { cascade: true, onDelete: 'CASCADE' })
   @JoinTable()
   tags: Tag[];
+
+  @OneToMany(() => Announcements, (announcement) => announcement.user)
+  announcements: Announcements[];
+
 }

@@ -12,10 +12,11 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { VotesModule } from './votes/votes.module';
 import { ProfileModule } from './profile/profile.module';
 import { CommentsModule } from './comments/comments.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
 import { TricksModule } from './tricks/tricks.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dbConfig), QuestionsModule, TagsModule, UsersModule, AuthModule, AnswerModule, EventEmitterModule.forRoot(), NotificationsModule, VotesModule, CommentsModule, ProfileModule, TricksModule],
+  imports: [TypeOrmModule.forRoot(dbConfig), QuestionsModule, TagsModule, UsersModule, AuthModule, AnswerModule, EventEmitterModule.forRoot(), NotificationsModule, VotesModule, CommentsModule, ProfileModule, AnnouncementsModule, TricksModule],
 })
 
 export class AppModule {
