@@ -12,4 +12,7 @@ export class CreateCommentDto {
 
   @IsOptional()
   tricksId: number;
+
+  @IsOptional()
+  announcementsId: number;
 }

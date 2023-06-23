@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { CustomBaseEntity } from './custom-base-entity';
 import { User } from './user.entity';
+import { Comment } from './comment.entity';
 
 @Entity()
 export class Announcements extends CustomBaseEntity {
@@ -15,4 +16,7 @@ export class Announcements extends CustomBaseEntity {
 
   @Column({type: 'json', default: [], nullable: true})
   blocks: Block[];
+
+  @OneToMany(() => Comment, (comment) => comment.announcements)
+  comments: Comment[];
 }

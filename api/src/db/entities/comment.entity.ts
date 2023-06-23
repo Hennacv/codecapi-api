@@ -3,6 +3,7 @@ import { CustomBaseEntity } from './custom-base-entity';
 import { Answer } from './answer.entity';
 import { User } from './user.entity';
 import { Tricks } from './tricks.entity';
+import { Announcements } from './announcement.entity';
 
 @Entity()
 export class Comment extends CustomBaseEntity {
@@ -26,4 +27,10 @@ export class Comment extends CustomBaseEntity {
 
   @ManyToOne(() => Tricks, (tricks) => tricks.comments, { onDelete: 'CASCADE' })
   tricks: Tricks;
+
+  @Column({ nullable: true })
+  announcementsId: number;
+
+  @ManyToOne(() => Announcements, (announcements) => announcements.comments, { onDelete: 'CASCADE' })
+  announcements: Announcements;
 }

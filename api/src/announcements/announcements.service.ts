@@ -48,7 +48,7 @@ export class AnnouncementService {
   async fetchAnnouncement(id: number) {
     return await Announcements.findOneOrFail({
       where: { id },
-      relations: ['user'],
+      relations: ['user', 'comments.user'],
     });
   }
 }
