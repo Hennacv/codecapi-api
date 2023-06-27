@@ -8,6 +8,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import dataSource from './db/data-source';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { applicationDefault, initializeApp } from 'firebase-admin/app';
+import { json, urlencoded } from 'express';
 
 async function bootstrap() {
   await dataSource.initialize();
@@ -23,6 +24,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.enableCors();
 
   await app.listen(3000);
