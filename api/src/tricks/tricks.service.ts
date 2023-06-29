@@ -3,14 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../db/entities/user.entity';
 import { CreateTrickDto } from './dto/create-trick.dto';
-import { Tricks } from '../db/entities/tricks.entity';
+import { Trick } from '../db/entities/trick.entity';
 import { UpdateTrickDto } from './dto/update-trick.dto';
 
 @Injectable()
 export class TrickService {
   constructor(
-    @InjectRepository(Tricks)
-    private repo: Repository<Tricks>,
+    @InjectRepository(Trick)
+    private repo: Repository<Trick>,
   ) {}
 
   async create(createTrickDto: CreateTrickDto, user: User) {
@@ -27,12 +27,12 @@ export class TrickService {
   }
 
   async remove(id: number) {
-    const trick = await Tricks.findOneByOrFail({ id });
+    const trick = await Trick.findOneByOrFail({ id });
     await this.repo.remove(trick);
   }
 
   async findAll() {
-    const tricks = await Tricks.find({
+    const tricks = await Trick.find({
       relations: ['user', 'votes.user', 'comments.user'],
       order: {
         createdAt: 'desc',
@@ -46,7 +46,7 @@ export class TrickService {
   }
 
   async fetchTrick(id: number) {
-    return await Tricks.findOneOrFail({
+    return await Trick.findOneOrFail({
       where: { id },
       relations: ['user', 'comments'],
     });

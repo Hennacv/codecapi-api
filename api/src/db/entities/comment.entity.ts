@@ -2,8 +2,8 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 import { CustomBaseEntity } from './custom-base-entity';
 import { Answer } from './answer.entity';
 import { User } from './user.entity';
-import { Tricks } from './tricks.entity';
 import { Announcements } from './announcement.entity';
+import { Trick } from './trick.entity';
 
 @Entity()
 export class Comment extends CustomBaseEntity {
@@ -13,7 +13,7 @@ export class Comment extends CustomBaseEntity {
   @Column({ nullable: true })
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.comments, { onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (user) => user.comments, { onDelete: 'CASCADE' })
   user: User;
 
   @Column({ nullable: true })
@@ -23,10 +23,10 @@ export class Comment extends CustomBaseEntity {
   answer: Answer;
 
   @Column({ nullable: true })
-  tricksId: number;
+  trickId: number;
 
-  @ManyToOne(() => Tricks, (tricks) => tricks.comments, { onDelete: 'CASCADE' })
-  tricks: Tricks;
+  @ManyToOne(() => Trick, (trick) => trick.comments, { onDelete: 'CASCADE' })
+  trick: Trick;
 
   @Column({ nullable: true })
   announcementsId: number;
