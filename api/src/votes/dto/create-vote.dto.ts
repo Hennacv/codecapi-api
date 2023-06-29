@@ -10,11 +10,11 @@ export class CreateVoteDto {
   userId: number;
 
   @IsOptional()
-  questionId?: number;
+  questionId: number;
 
   @IsOptional()
-  answerId?: number;
+  answerId: number;
 
   @IsOptional()
-  tricksId?: number;
+  tricksId: number;
 }
