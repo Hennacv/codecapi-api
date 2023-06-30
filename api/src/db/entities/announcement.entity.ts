@@ -17,6 +17,18 @@ export class Announcements extends CustomBaseEntity {
   @Column({type: 'json', default: [], nullable: true})
   blocks: Block[];
 
+  @Column()
+  type: string;
+
+  @Column({ nullable: true })
+  date: string;
+
+  @Column({ nullable: true })
+  time: string;
+
+  @Column({ nullable: true })
+  location: string;
+
   @OneToMany(() => Comment, (comment) => comment.announcements)
   comments: Comment[];
 }
