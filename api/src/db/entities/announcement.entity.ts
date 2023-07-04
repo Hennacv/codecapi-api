@@ -29,6 +29,9 @@ export class Announcements extends CustomBaseEntity {
   @Column({ nullable: true })
   location: string;
 
+  @Column({ nullable: true })
+  image: string;
+
   @OneToMany(() => Comment, (comment) => comment.announcements)
   comments: Comment[];
 }

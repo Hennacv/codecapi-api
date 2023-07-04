@@ -18,4 +18,7 @@ export class CreateAnnouncementDto {
 
   @IsOptional()
   location: string;
+
+  @IsOptional()
+  image: string;
 }
