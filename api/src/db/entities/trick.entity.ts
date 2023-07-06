@@ -5,11 +5,11 @@ import { Vote } from './vote.entity';
 import { Comment } from './comment.entity';
 
 @Entity()
-export class Tricks extends CustomBaseEntity {
-  @Column({ name: 'user_id', nullable: true })
+export class Trick extends CustomBaseEntity {
+  @Column({ nullable: true })
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.tricks, { onDelete: 'SET NULL' })
+  @ManyToOne(() => User, (user) => user.trick, { onDelete: 'SET NULL' })
   user: User;
 
   @Column()
@@ -18,9 +18,9 @@ export class Tricks extends CustomBaseEntity {
   @Column({type: 'json', default: [], nullable: true})
   blocks: Block[];
 
-  @OneToMany(() => Vote, (vote) => vote.tricks)
+  @OneToMany(() => Vote, (vote) => vote.trick)
   votes: Vote[];
 
-  @OneToMany(() => Comment, (comment) => comment.tricks)
+  @OneToMany(() => Comment, (comment) => comment.trick)
   comments: Comment[];
 }

@@ -16,5 +16,5 @@ export class CreateVoteDto {
   answerId: number;
 
   @IsOptional()
-  tricksId: number;
+  trickId: number;
 }
